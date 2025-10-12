@@ -224,7 +224,7 @@ int main()
 }
 */
 // Home Work 3.3 ( срок 5.10.2025 )
-
+/*
 int main() 
 {
     SetConsoleCP(1251);
@@ -260,4 +260,4 @@ int main()
 
     return 0;
 }
-
+*/
