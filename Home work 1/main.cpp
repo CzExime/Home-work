@@ -1,6 +1,8 @@
 ﻿#include <iostream>
 #include <iomanip> 
 #include <Windows.h>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 // Home Work 1
@@ -261,4 +263,145 @@ int main()
     return 0;
 }
 */
-//
+// Home Work 4.1 ( срок 19.10.2025 )
+/*
+int main() 
+{
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    srand(time(NULL));
+
+    const int SIZE = 10; 
+    int arr[SIZE];
+
+    srand(time(0));
+
+    for (int i = 0; i < SIZE; i++) {
+        arr[i] = rand() % 100 + 1;
+    }
+
+    cout << "Массив: ";
+    for (int i = 0; i < SIZE; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    int min = arr[0];
+    int max = arr[0];
+
+    for (int i = 1; i < SIZE; i++) {
+        if (arr[i] < min) {
+            min = arr[i];
+        }
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+
+    cout << "Минимальный элемент: " << min << endl;
+    cout << "Максимальный элемент: " << max << endl;
+
+    return 0;
+}
+*/
+// Home Work 4.2 ( срок 19.10.2025 )
+/*
+int main() 
+{
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    srand(time(NULL));
+
+    const int SIZE = 15; 
+    int arr[SIZE];
+    int range_min, range_max, user_value;
+
+    cout << "Введите минимальное значение диапазона: ";
+    cin >> range_min;
+    cout << "Введите максимальное значение диапазона: ";
+    cin >> range_max;
+
+    srand(time(0));
+
+    for (int i = 0; i < SIZE; i++) {
+        arr[i] = rand() % (range_max - range_min + 1) + range_min;
+    }
+
+    cout << "Массив: ";
+    for (int i = 0; i < SIZE; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    cout << "Введите значение для сравнения: ";
+    cin >> user_value;
+
+    int sum = 0;
+    for (int i = 0; i < SIZE; i++) {
+        if (arr[i] < user_value) {
+            sum += arr[i];
+        }
+    }
+
+    cout << "Сумма элементов меньше " << user_value << ": " << sum << endl;
+
+    return 0;
+}
+*/
+// Home Work 4.3 ( срок 19.10.2025 )
+/*
+int main() 
+{
+
+    const int MONTHS = 12;
+    double profit[MONTHS];
+
+    cout << "Введите прибыль фирмы за 12 месяцев:" << endl;
+    for (int i = 0; i < MONTHS; i++) 
+    {
+        cout << "Месяц " << (i + 1) << ": ";
+        cin >> profit[i];
+    }
+
+    int start_month, end_month;
+    cout << "\nВведите начальный месяц диапазона (1-12): ";
+    cin >> start_month;
+    cout << "Введите конечный месяц диапазона (1-12): ";
+    cin >> end_month;
+
+    if (start_month < 1 || start_month > 12 ||
+        end_month < 1 || end_month > 12 ||
+        start_month > end_month) 
+    {
+        cout << "Ошибка! Неверный диапазон месяцев." << endl;
+        return 1;
+    }
+
+    double min_profit = profit[start_month - 1];
+    double max_profit = profit[start_month - 1];
+    int min_month = start_month;
+    int max_month = start_month;
+
+    for (int i = start_month; i <= end_month; i++) 
+    {
+        int index = i - 1; 
+
+        if (profit[index] < min_profit) 
+        {
+            min_profit = profit[index];
+            min_month = i;
+        }
+        if (profit[index] > max_profit) 
+        {
+            max_profit = profit[index];
+            max_month = i;
+        }
+    }
+
+    cout << "\nВ диапазоне с " << start_month << " по " << end_month << " месяц:" << endl;
+    cout << "Максимальная прибыль: " << max_profit << " в месяце " << max_month << endl;
+    cout << "Минимальная прибыль: " << min_profit << " в месяце " << min_month << endl;
+
+    return 0;
+}
+*/
