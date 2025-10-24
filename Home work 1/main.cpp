@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <cstdlib>
 #include <ctime>
+#include <string>
 using namespace std;
 
 // Home Work 1
@@ -352,6 +353,9 @@ int main()
 /*
 int main() 
 {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    srand(time(NULL));
 
     const int MONTHS = 12;
     double profit[MONTHS];
@@ -403,5 +407,505 @@ int main()
     cout << "Минимальная прибыль: " << min_profit << " в месяце " << min_month << endl;
 
     return 0;
+}
+*/
+// Home Work 4.4 ( срок 19.10.2025 )
+/*
+        // Функция для проверки високосного года
+bool isLeapYear(int year) 
+{
+    return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+}
+        // Функция для вычисления количества дней в месяце
+int daysInMonth(int month, int year) 
+{
+    switch (month) {
+    case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+        return 31;
+    case 4: case 6: case 9: case 11:
+        return 30;
+    case 2:
+        return isLeapYear(year) ? 29 : 28;
+    default:
+        return 0;
+    }
+}
+        // Функция для вычисления количества дней от начала эпохи до даты
+int daysSinceEpoch(int day, int month, int year) 
+{
+    int totalDays = 0;
+
+    for (int y = 1; y < year; y++) 
+    {
+        totalDays += isLeapYear(y) ? 366 : 365;
+    }
+
+    for (int m = 1; m < month; m++) 
+    {
+        totalDays += daysInMonth(m, year);
+    }
+
+    totalDays += day;
+
+    return totalDays;
+}
+        // Основная функция для вычисления разности в днях
+int dateDifference(int day1, int month1, int year1,
+    int day2, int month2, int year2) 
+{
+    int days1 = daysSinceEpoch(day1, month1, year1);
+    int days2 = daysSinceEpoch(day2, month2, year2);
+
+    return abs(days2 - days1);
+}
+
+int main() 
+{
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    srand(time(NULL));
+
+    int day1, month1, year1;
+    int day2, month2, year2;
+
+    cout << "Введите первую дату (день месяц год): ";
+    cin >> day1 >> month1 >> year1;
+
+    cout << "Введите вторую дату (день месяц год): ";
+    cin >> day2 >> month2 >> year2;
+
+    int difference = dateDifference(day1, month1, year1, day2, month2, year2);
+
+    cout << "Разность между датами: " << difference << " дней" << endl;
+
+    return 0;
+}
+*/
+// Home Work 4.5 ( срок 19.10.2025 )
+/*
+        // Функция для вычисления среднего арифметического массива
+double calculateAverage(int arr[], int size) {
+    if (size == 0) {
+        return 0.0;
+    }
+
+    int sum = 0;
+    for (int i = 0; i < size; i++) {
+        sum += arr[i];
+    }
+
+    return static_cast<double>(sum) / size;
+}
+        // Вспомогательная функция для вывода массива
+void printArray(int arr[], int size) {
+    cout << "Массив: ";
+    for (int i = 0; i < size; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+
+int main() 
+{
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    srand(time(NULL));
+
+    const int SIZE = 5;
+    int arr[SIZE];
+
+    cout << "Введите " << SIZE << " элементов массива:" << endl;
+    for (int i = 0; i < SIZE; i++) {
+        cout << "Элемент " << i + 1 << ": ";
+        cin >> arr[i];
+    }
+
+    printArray(arr, SIZE);
+
+    double average = calculateAverage(arr, SIZE);
+    cout << "Среднее арифметическое: " << average << endl;
+
+    return 0;
+}
+*/
+// Home Work 4.6 ( срок 19.10.2025 )
+/*
+void analyzeArray(int arr[], int size) 
+{
+    int positive = 0, negative = 0, zero = 0;
+
+    for (int i = 0; i < size; i++) 
+    {
+        if (arr[i] > 0) {
+            positive++;
+        }
+        else if (arr[i] < 0) {
+            negative++;
+        }
+        else {
+            zero++;
+        }
+    }
+
+    cout << "Результаты анализа массива:" << endl;
+    cout << "Положительных элементов: " << positive << endl;
+    cout << "Отрицательных элементов: " << negative << endl;
+    cout << "Нулевых элементов: " << zero << endl;
+}
+
+int main() 
+{
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    srand(time(NULL));
+
+    const int SIZE = 6;
+    int arr[SIZE] = { 3, -2, 0, 7, -1, 0 };
+
+    cout << "Массив: ";
+    for (int i = 0; i < SIZE; i++) 
+    {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    analyzeArray(arr, SIZE);
+
+    return 0;
+}
+*/
+// Shop ( срок 24.10.2025 )
+/*
+
+// Структура для хранения информации о товаре
+struct Product 
+{
+    string name;
+    double price;
+    string category;
+    int quantity;
+};
+
+// Константы цен
+const double APPLE_JUICE_PRICE = 150.0;
+const double ORANGE_JUICE_PRICE = 180.0;
+const double APRICOT_JUICE_PRICE = 170.0;
+const double PEAR_JUICE_PRICE = 160.0;
+const double TOMATO_JUICE_PRICE = 120.0;
+const double ONION_JUICE_PRICE = 90.0;
+const double CUCUMBER_JUICE_PRICE = 110.0;
+const double GARLIC_TEA_PRICE = 130.0;
+const double PARSLEY_TEA_PRICE = 140.0;
+
+// Глобальный ассортимент товаров
+const Product ASSORTMENT[] = 
+{
+    {"Яблочный сок", APPLE_JUICE_PRICE, "Фруктовые", 0},
+    {"Апельсиновый сок", ORANGE_JUICE_PRICE, "Фруктовые", 0},
+    {"Абрикосовый сок", APRICOT_JUICE_PRICE, "Фруктовые", 0},
+    {"Грушевый сок", PEAR_JUICE_PRICE, "Фруктовые", 0},
+    {"Томатный сок", TOMATO_JUICE_PRICE, "Овощные", 0},
+    {"Луковый сок", ONION_JUICE_PRICE, "Овощные", 0},
+    {"Огуречный сок", CUCUMBER_JUICE_PRICE, "Овощные", 0},
+    {"Чесночный чай", GARLIC_TEA_PRICE, "Чаи", 0},
+    {"Петрушечный чай", PARSLEY_TEA_PRICE, "Чаи", 0}
+};
+const int ASSORTMENT_SIZE = 9;
+
+// Функции для работы с программой
+void displayAssortment();
+void addToCart(Product cart[], int& cartSize);
+void displayCart(Product cart[], int cartSize);
+double calculateBaseTotal(Product cart[], int cartSize);
+double calculateParsleyTeaDiscount(Product cart[], int cartSize);
+double calculateTotalDiscount(Product cart[], int cartSize);
+double calculateOnionJuiceDiscount(Product cart[], int cartSize);
+double calculateFinalTotal(Product cart[], int cartSize, double& totalDiscount);
+void processPayment(Product cart[], int& cartSize);
+void clearCart(Product cart[], int& cartSize);
+
+// Основная функция
+int main() 
+{
+    SetConsoleOutputCP(1251);
+    SetConsoleCP(1251);
+
+    const int MAX_PRODUCTS = 50;
+    Product cart[MAX_PRODUCTS];
+    int cartSize = 0;
+    int choice;
+
+    do 
+    {
+        system("cls");
+        cout << "=== МАГАЗИН 'СОКИ ИМАНА' ===" << endl;
+        cout << "1. Показать ассортимент и добавить товары" << endl;
+        cout << "2. Просмотреть корзину" << endl;
+        cout << "3. Рассчитать итог и оплатить" << endl;
+        cout << "0. Выход" << endl;
+        cout << "Выберите действие: ";
+        cin >> choice;
+
+        switch (choice) 
+        {
+        case 1:
+            displayAssortment();
+            addToCart(cart, cartSize);
+            break;
+        case 2:
+            displayCart(cart, cartSize);
+            break;
+        case 3:
+            if (cartSize > 0) 
+            {
+                double totalDiscount = 0;
+                double finalTotal = calculateFinalTotal(cart, cartSize, totalDiscount);
+
+                cout << fixed << setprecision(2);
+                cout << "\n=== ИТОГОВЫЙ ЧЕК ===" << endl;
+                cout << "Сумма: " << finalTotal + totalDiscount << " руб." << endl;
+                if (totalDiscount > 0) 
+                {
+                    cout << "Скидка: " << totalDiscount << " руб." << endl;
+                }
+                cout << "К оплате: " << finalTotal << " руб." << endl;
+
+                processPayment(cart, cartSize);
+            }
+            else 
+            {
+                cout << "Корзина пуста!" << endl;
+                Sleep(2000);
+            }
+            break;
+        case 0:
+            cout << "Спасибо за посещение!" << endl;
+            break;
+        default:
+            cout << "Неверный выбор!" << endl;
+            Sleep(1000);
+        }
+    } while (choice != 0);
+
+    return 0;
+}
+
+// Функция для отображения ассортимента
+void displayAssortment() 
+{
+    system("cls");
+    cout << "=== АССОРТИМЕНТ МАГАЗИНА ===" << endl;
+    cout << "\n--- ФРУКТОВЫЕ СОКИ ---" << endl;
+    for (int i = 0; i < 4; i++) 
+    {
+        cout << i + 1 << ". " << ASSORTMENT[i].name << " - " << ASSORTMENT[i].price << " руб./литр" << endl;
+    }
+
+    cout << "\n--- ОВОЩНЫЕ СОКИ ---" << endl;
+    for (int i = 4; i < 7; i++) 
+    {
+        cout << i + 1 << ". " << ASSORTMENT[i].name << " - " << ASSORTMENT[i].price << " руб./литр" << endl;
+    }
+
+    cout << "\n--- ЧАИ ---" << endl;
+    for (int i = 7; i < ASSORTMENT_SIZE; i++) 
+    {
+        cout << i + 1 << ". " << ASSORTMENT[i].name << " - " << ASSORTMENT[i].price << " руб./литр" << endl;
+    }
+
+    cout << "\nАКЦИИ:" << endl;
+    cout << "- При покупке 3л петрушечного чая - скидка 5%" << endl;
+    cout << "- При сумме чека > 1000 руб. - скидка 13%" << endl;
+    cout << "- Каждый 4-й литр лукового сока - БЕСПЛАТНО!" << endl;
+    cout << "===============================" << endl;
+}
+
+// Функция для добавления товара в корзину
+void addToCart(Product cart[], int& cartSize) 
+{
+    const int MAX_PRODUCTS = 50;
+
+    cout << "\n=== ДОБАВЛЕНИЕ ТОВАРОВ В КОРЗИНУ ===" << endl;
+
+    int continueAdding = 1;
+    while (continueAdding == 1 && cartSize < MAX_PRODUCTS) 
+    {
+        int productChoice, quantity;
+
+        cout << "\nВыберите товар (1-" << ASSORTMENT_SIZE << "): ";
+        cin >> productChoice;
+
+        if (productChoice < 1 || productChoice > ASSORTMENT_SIZE) 
+        {
+            cout << "Неверный выбор товара!" << endl;
+            continue;
+        }
+
+        cout << "Введите количество литров: ";
+        cin >> quantity;
+
+        if (quantity <= 0) 
+        {
+            cout << "Неверное количество!" << endl;
+            continue;
+        }
+
+        // Создаем новый товар на основе ассортимента
+        Product newProduct = ASSORTMENT[productChoice - 1];
+        newProduct.quantity = quantity;
+
+        // Добавляем в корзину
+        cart[cartSize] = newProduct;
+        cartSize++;
+
+        cout << "Товар '" << newProduct.name << "' добавлен в корзину!" << endl;
+
+        if (cartSize < MAX_PRODUCTS) 
+        {
+            cout << "\nДобавить еще товар? (1 - Да, 0 - Нет): ";
+            cin >> continueAdding;
+        }
+        else 
+        {
+            cout << "Корзина заполнена!" << endl;
+            continueAdding = 0;
+        }
+    }
+
+    cout << "\nВозвращаемся в главное меню..." << endl;
+    Sleep(2000);
+}
+
+// Функция для отображения корзины
+void displayCart(Product cart[], int cartSize) 
+{
+    system("cls");
+    cout << "=== ВАША КОРЗИНА ===" << endl;
+
+    if (cartSize == 0) 
+    {
+        cout << "Корзина пуста!" << endl;
+    }
+    else 
+    {
+        double total = calculateBaseTotal(cart, cartSize);
+        for (int i = 0; i < cartSize; i++) 
+        {
+            double itemTotal = cart[i].price * cart[i].quantity;
+            cout << i + 1 << ". " << cart[i].name << " (" << cart[i].category << ")" << endl;
+            cout << "   Количество: " << cart[i].quantity << " л." << endl;
+            cout << "   Цена: " << cart[i].price << " руб./литр" << endl;
+            cout << "   Сумма: " << itemTotal << " руб." << endl << endl;
+        }
+        cout << "Общая сумма: " << total << " руб." << endl;
+    }
+
+    cout << "\nНажмите любую клавишу для возврата...";
+    system("pause > nul");
+}
+
+// Функция для расчета базовой суммы без скидок
+double calculateBaseTotal(Product cart[], int cartSize) 
+{
+    double total = 0;
+    for (int i = 0; i < cartSize; i++) 
+    {
+        total += cart[i].price * cart[i].quantity;
+    }
+    return total;
+}
+
+// Функция для расчета скидки на петрушечный чай
+double calculateParsleyTeaDiscount(Product cart[], int cartSize) 
+{
+    double discount = 0;
+    for (int i = 0; i < cartSize; i++) 
+    {
+        if (cart[i].name == "Петрушечный чай" && cart[i].quantity >= 3) 
+        {
+            discount = cart[i].price * cart[i].quantity * 0.05;
+            cout << "Скидка на петрушечный чай: " << discount << " руб." << endl;
+        }
+    }
+    return discount;
+}
+
+// Функция для расчета общей скидки при сумме чека > 1000 руб.
+double calculateTotalDiscount(Product cart[], int cartSize) 
+{
+    double baseTotal = calculateBaseTotal(cart, cartSize);
+    double discount = 0;
+
+    if (baseTotal > 1000) 
+    {
+        discount = baseTotal * 0.13;
+        cout << "Скидка 13% на весь чек: " << discount << " руб." << endl;
+    }
+
+    return discount;
+}
+
+// Функция для расчета скидки на луковый сок (каждый 4-й литр бесплатно)
+double calculateOnionJuiceDiscount(Product cart[], int cartSize) 
+{
+    double discount = 0;
+    for (int i = 0; i < cartSize; i++) 
+    {
+        if (cart[i].name == "Луковый сок") 
+        {
+            int freeLiters = cart[i].quantity / 4;
+            if (freeLiters > 0) {
+                discount = freeLiters * cart[i].price;
+                cout << "Бесплатных литров лукового сока: " << freeLiters << " (скидка: " << discount << " руб.)" << endl;
+            }
+        }
+    }
+    return discount;
+}
+
+// Функция для расчета итоговой суммы со всеми скидками
+double calculateFinalTotal(Product cart[], int cartSize, double& totalDiscount) 
+{
+    double baseTotal = calculateBaseTotal(cart, cartSize);
+    double parsleyDiscount = calculateParsleyTeaDiscount(cart, cartSize);
+    double totalPercentageDiscount = calculateTotalDiscount(cart, cartSize);
+    double onionDiscount = calculateOnionJuiceDiscount(cart, cartSize);
+
+    totalDiscount = parsleyDiscount + totalPercentageDiscount + onionDiscount;
+
+    return baseTotal - totalDiscount;
+}
+
+// Функция для обработки оплаты
+void processPayment(Product cart[], int& cartSize) 
+{
+    cout << "\n=== ОПЛАТА ===" << endl;
+    cout << "1. Оплатить" << endl;
+    cout << "2. Отмена" << endl;
+    cout << "Выберите действие: ";
+
+    int choice;
+    cin >> choice;
+
+    if (choice == 1) 
+    {
+        cout << "\nОПЛАТА ПРОШЛА УСПЕШНО!" << endl;
+        cout << "Спасибо за покупку!" << endl;
+        clearCart(cart, cartSize);
+    }
+    else 
+    {
+        cout << "\nОплата отменена." << endl;
+    }
+
+    cout << "\nВозвращаемся в главное меню..." << endl;
+    Sleep(3000);
+}
+
+// Функция для очистки корзины
+void clearCart(Product cart[], int& cartSize) 
+{
+    cartSize = 0;
+    cout << "Корзина очищена." << endl;
 }
 */
