@@ -909,3 +909,237 @@ void clearCart(Product cart[], int& cartSize)
     cout << "Корзина очищена." << endl;
 }
 */
+// ОСОБАЯ НЕДЕЛЯ 
+/*
+
+// Функция распределения динамической памяти
+int* allocateMemory(int size) 
+{
+    if (size <= 0) 
+    {
+        cout << "Ошибка: размер массива должен быть положительным!" << endl;
+        return nullptr;
+    }
+    return new int[size];
+}
+
+// Функция инициализации динамического массива
+void initializeArray(int* arr, int size, int minValue = 1, int maxValue = 100) 
+{
+    if (arr == nullptr) 
+    {
+        cout << "Ошибка: массив не инициализирован!" << endl;
+        return;
+    }
+
+    for (int i = 0; i < size; i++) 
+    {
+        arr[i] = rand() % (maxValue - minValue + 1) + minValue;
+    }
+}
+
+// Функция печати динамического массива
+void printArray(const int* arr, int size) 
+{
+    if (arr == nullptr) 
+    {
+        cout << "Массив пуст!" << endl;
+        return;
+    }
+
+    cout << "Динамический массив [" << size << "]: ";
+    for (int i = 0; i < size; i++) 
+    {
+        cout << arr[i];
+        if (i < size - 1) 
+        {
+            cout << ", ";
+        }
+    }
+    cout << endl;
+}
+
+// Функция удаления динамического массива
+void deleteArray(int*& arr) 
+{
+    if (arr != nullptr) 
+    {
+        delete[] arr;
+        arr = nullptr;
+        cout << "Память освобождена!" << endl;
+    }
+}
+
+// Функция добавления элемента в конец массива
+int* addElement(int* arr, int& size, int newElement) 
+{
+    int* newArr = allocateMemory(size + 1);
+
+    if (newArr == nullptr) 
+    {
+        return arr; 
+    }
+
+    for (int i = 0; i < size; i++) 
+    {
+        newArr[i] = arr[i];
+    }
+
+    newArr[size] = newElement;
+    size++;
+
+    deleteArray(arr);
+
+    return newArr;
+}
+
+// Функция вставки элемента по указанному индексу
+int* insertElement(int* arr, int& size, int index, int newElement) 
+{
+    if (index < 0 || index > size) 
+    {
+        cout << "Ошибка: неверный индекс для вставки!" << endl;
+        return arr;
+    }
+
+    int* newArr = allocateMemory(size + 1);
+
+    if (newArr == nullptr) 
+    {
+        return arr;
+    }
+
+    for (int i = 0; i < index; i++) 
+    {
+        newArr[i] = arr[i];
+    }
+
+    newArr[index] = newElement;
+
+    for (int i = index; i < size; i++) 
+    {
+        newArr[i + 1] = arr[i];
+    }
+
+    size++;
+
+    // Удаляем старый массив
+    deleteArray(arr);
+
+    return newArr;
+}
+
+// Функция удаления элемента по указанному индексу
+int* removeElement(int* arr, int& size, int index) 
+{
+    if (index < 0 || index >= size) 
+    {
+        cout << "Ошибка: неверный индекс для удаления!" << endl;
+        return arr;
+    }
+
+    if (size == 1) 
+    {
+        deleteArray(arr);
+        size = 0;
+        return nullptr;
+    }
+
+    int* newArr = allocateMemory(size - 1);
+
+    if (newArr == nullptr) 
+    {
+        return arr;
+    }
+
+    for (int i = 0; i < index; i++) 
+    {
+        newArr[i] = arr[i];
+    }
+
+    for (int i = index + 1; i < size; i++) 
+    {
+        newArr[i - 1] = arr[i];
+    }
+
+    size--;
+
+    deleteArray(arr);
+
+    return newArr;
+}
+
+// Работа всех функций
+int main() 
+{
+    SetConsoleOutputCP(1251);
+    SetConsoleCP(1251);
+    srand(time(NULL));
+
+    int size = 5;
+    int* dynamicArray = nullptr;
+
+    cout << "=== ДЕМОНСТРАЦИЯ РАБОТЫ С ДИНАМИЧЕСКИМ МАССИВОМ ===" << endl;
+
+    // 1. Распределение памяти
+    cout << "\n1. Распределение памяти для массива из " << size << " элементов:" << endl;
+    dynamicArray = allocateMemory(size);
+
+    // 2. Инициализация массива
+    cout << "\n2. Инициализация массива случайными числами:" << endl;
+    initializeArray(dynamicArray, size);
+    printArray(dynamicArray, size);
+
+    // 3. Добавление элемента в конец
+    cout << "\n3. Добавление элемента 999 в конец массива:" << endl;
+    dynamicArray = addElement(dynamicArray, size, 999);
+    printArray(dynamicArray, size);
+
+    // 4. Вставка элемента по индексу
+    cout << "\n4. Вставка элемента 777 на позицию 2:" << endl;
+    dynamicArray = insertElement(dynamicArray, size, 2, 777);
+    printArray(dynamicArray, size);
+
+    // 5. Удаление элемента по индексу
+    cout << "\n5. Удаление элемента с позиции 3:" << endl;
+    dynamicArray = removeElement(dynamicArray, size, 3);
+    printArray(dynamicArray, size);
+
+    // 6. Добавление нескольких элементов
+    cout << "\n6. Добавление нескольких элементов:" << endl;
+    dynamicArray = addElement(dynamicArray, size, 111);
+    dynamicArray = addElement(dynamicArray, size, 222);
+    dynamicArray = addElement(dynamicArray, size, 333);
+    printArray(dynamicArray, size);
+
+    // 7. Вставка в начало
+    cout << "\n7. Вставка элемента 555 в начало:" << endl;
+    dynamicArray = insertElement(dynamicArray, size, 0, 555);
+    printArray(dynamicArray, size);
+
+    // 8. Удаление из начала
+    cout << "\n8. Удаление первого элемента:" << endl;
+    dynamicArray = removeElement(dynamicArray, size, 0);
+    printArray(dynamicArray, size);
+
+    // 9. Удаление из конца
+    cout << "\n9. Удаление последнего элемента:" << endl;
+    dynamicArray = removeElement(dynamicArray, size, size - 1);
+    printArray(dynamicArray, size);
+
+    // 10. Освобождение памяти
+    cout << "\n10. Освобождение памяти:" << endl;
+    deleteArray(dynamicArray);
+    printArray(dynamicArray, size);
+
+    cout << "\n11. Создание нового массива после удаления:" << endl;
+    size = 3;
+    dynamicArray = allocateMemory(size);
+    initializeArray(dynamicArray, size, 10, 20);
+    printArray(dynamicArray, size);
+    deleteArray(dynamicArray);
+
+    return 0;
+}
+*/
+
